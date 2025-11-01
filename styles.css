@@ -75,7 +75,7 @@ img {
 body {
     position: relative;
     width: 100%;
-    height: 100vh;
+    height: 95vh;
     background-color: var(--prm_color);
     font-family: var(--font_sec);
     transition: all .5s ease;
@@ -93,6 +93,7 @@ header {
     background-color: var(--prm_color);
     color: var(--sec_color);
     transition: .5s ease;
+    z-index: 999;
 }
 
 header::after {

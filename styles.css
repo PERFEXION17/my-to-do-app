@@ -241,7 +241,7 @@ header::after {
 }
 
 #list li i {
-    margin-left: -28%;
+    /* margin-left: -28%; */
 }
 
 .type_in {

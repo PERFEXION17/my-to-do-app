@@ -56,7 +56,7 @@ function addList() {
   if (taskTime) {
     const clock = document.createElement("i");
     clock.classList.add("ri-notification-3-line");
-    // clock.style.marginLeft = "-30%";
+    clock.style.marginLeft = "-10px";
     li.appendChild(clock);
   }
 

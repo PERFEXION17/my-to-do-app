@@ -31,17 +31,60 @@
       </button>
     </div>
     <footer>&copy; 2025 PEREFXION INC. All Rights Reserved</footer>
+    
     <script src="script.js"></script>
+
     <script>
       if ("serviceWorker" in navigator) {
         window.addEventListener("load", () => {
           navigator.serviceWorker
             .register("service-worker.js")
-            .then((reg) => console.log("Service Worker registered:", reg.scope))
-            .catch((err) =>
-              console.log("Service Worker registration failed:", err)
-            );
+            .then((registration) => {
+              console.log("Service Worker registered:", registration.scope);
+
+              // Listen for new service worker updates
+              registration.addEventListener("updatefound", () => {
+                const newWorker = registration.installing;
+
+                newWorker.addEventListener("statechange", () => {
+                  if (
+                    newWorker.state === "installed" &&
+                    navigator.serviceWorker.controller
+                  ) {
+                    // Show the custom update notification
+                    showUpdateToast(registration);
+                  }
+                });
+              });
+            });
         });
+
+        function showUpdateToast(registration) {
+          const toast = document.createElement("div");
+          toast.textContent =
+            "✨ A new version is available. Click to refresh.";
+          Object.assign(toast.style, {
+            position: "fixed",
+            bottom: "20px",
+            left: "50%",
+            transform: "translateX(-50%)",
+            background: "hsl(270, 70%, 60%)",
+            color: "white",
+            padding: "1rem 1.5rem",
+            borderRadius: "1rem",
+            fontFamily: "Quicksand, sans-serif",
+            cursor: "pointer",
+            boxShadow: "0 4px 10px hsla(270, 40%, 20%, 0.3)",
+            zIndex: 9999,
+          });
+
+          toast.onclick = () => {
+            registration.waiting.postMessage({ type: "SKIP_WAITING" });
+            window.location.reload();
+          };
+
+          document.body.appendChild(toast);
+        }
       }
     </script>
   </body>

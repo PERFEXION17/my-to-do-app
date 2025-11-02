@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>My To-Do</title>
     <link rel="stylesheet" href="styles.css" />
+    <link rel="manifest" href="manifest.json" />
     <link
       href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
       rel="stylesheet"
@@ -24,14 +25,24 @@
     </div>
     <div class="type_in">
       <input type="text" id="input" placeholder="Add Your Tasks" />
-      <input type="datetime-local" id="task-time">
-      <button
-        onclick="addList()"
-      >
+      <input type="datetime-local" id="task-time" />
+      <button onclick="addList()">
         <i class="ri-sticky-note-add-line"></i>
       </button>
     </div>
     <footer>&copy; 2025 PEREFXION INC. All Rights Reserved</footer>
     <script src="script.js"></script>
+    <script>
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => {
+          navigator.serviceWorker
+            .register("service-worker.js")
+            .then((reg) => console.log("Service Worker registered:", reg.scope))
+            .catch((err) =>
+              console.log("Service Worker registration failed:", err)
+            );
+        });
+      }
+    </script>
   </body>
 </html>

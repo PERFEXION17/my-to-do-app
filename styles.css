@@ -240,10 +240,6 @@ header::after {
     background-position: center;
 }
 
-#list li i {
-    /* margin-left: -28%; */
-}
-
 .type_in {
     position: absolute;
     bottom: 2rem;
